@@ -31,7 +31,7 @@ dependencies:
     flutter:
         sdk: flutter
 
-    # Icon Library
+    google_fonts: ^6.2.1
     hugeicons: ^0.0.7
 
 dev_dependencies:

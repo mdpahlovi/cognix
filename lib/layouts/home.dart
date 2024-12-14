@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:kajbari/functions/createRoute.dart';
+import 'package:kajbari/screens/add-project.dart';
 import 'package:kajbari/screens/calendar.dart';
 import 'package:kajbari/screens/home.dart';
 import 'package:kajbari/screens/messages.dart';
@@ -14,18 +16,29 @@ class HomeLayout extends StatefulWidget {
 
 class _HomeLayoutState extends State<HomeLayout> {
   int selectedIndex = 0;
+  final List<String> titles = ["", "Calendar", "", "Messages", "Profile"];
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final ColorScheme theme = Theme.of(context).colorScheme;
+    final NavigatorState navigator = Navigator.of(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(titles[selectedIndex]),
+        actions: [
+          IconButton.outlined(
+            onPressed: () {},
+            iconSize: 20,
+            icon: Icon(HugeIcons.strokeRoundedNotification02),
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(theme.surface),
+            ),
+          )
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        indicatorColor: theme.primaryColor,
+        onDestinationSelected: (index) => setState(() => selectedIndex = index),
+        indicatorColor: theme.primary,
         selectedIndex: selectedIndex,
         destinations: [
           NavigationItem(
@@ -38,7 +51,9 @@ class _HomeLayoutState extends State<HomeLayout> {
           ),
           Center(
             child: IconButton.filled(
-                onPressed: () {}, icon: Icon(HugeIcons.strokeRoundedAdd01)),
+              icon: Icon(HugeIcons.strokeRoundedAdd01),
+              onPressed: () => navigator.push(createRoute(AddProject())),
+            ),
           ),
           NavigationItem(
             icon: HugeIcons.strokeRoundedMail01,
@@ -51,14 +66,13 @@ class _HomeLayoutState extends State<HomeLayout> {
           ),
         ],
       ),
-      body: SafeArea(
-          child: [
+      body: [
         HomeScreen(),
         CalendarScreen(),
         Placeholder(),
         MessagesScreen(),
         ProfileScreen()
-      ][selectedIndex]),
+      ][selectedIndex],
     );
   }
 }
@@ -78,9 +92,6 @@ class NavigationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationDestination(
-      selectedIcon: badge is String
-          ? Badge(label: Text(badge!), child: Icon(icon, color: Colors.white))
-          : Icon(icon, color: Colors.white),
       icon: badge is String
           ? Badge(label: Text(badge!), child: Icon(icon))
           : Icon(icon),
