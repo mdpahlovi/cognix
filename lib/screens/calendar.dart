@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CalendarScreen extends StatefulWidget {
+class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
 
   @override
-  State<CalendarScreen> createState() => _CalendarScreenState();
-}
-
-class _CalendarScreenState extends State<CalendarScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Text("Pahlovi");
+    return Center(
+      child: Text("Calendar Screen"),
+    );
   }
 }

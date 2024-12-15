@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kajbari/layouts/home.dart';
+import 'package:kajbari/screens/add-project.dart';
 
 void main() {
   runApp(const KajBari());
@@ -10,7 +12,7 @@ class KajBari extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'KajBari',
       theme: ThemeData(
         useMaterial3: true,
@@ -34,7 +36,18 @@ class KajBari extends StatelessWidget {
           outline: const Color(0x1AFFFFFF),
         ),
       ),
-      home: const HomeLayout(),
+      initialRoute: "/",
+      getPages: [
+        GetPage(
+          name: '/',
+          page: () => HomeLayout(),
+        ),
+        GetPage(
+          name: '/add-project',
+          page: () => AddProject(),
+          transition: Transition.downToUp,
+        ),
+      ],
     );
   }
 }

@@ -1,78 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:kajbari/functions/createRoute.dart';
-import 'package:kajbari/screens/add-project.dart';
 import 'package:kajbari/screens/calendar.dart';
 import 'package:kajbari/screens/home.dart';
 import 'package:kajbari/screens/messages.dart';
 import 'package:kajbari/screens/profile.dart';
+import 'package:kajbari/widgets/global/NotificationButton.dart';
 
-class HomeLayout extends StatefulWidget {
-  const HomeLayout({super.key});
-
-  @override
-  State<HomeLayout> createState() => _HomeLayoutState();
+class HomeController extends GetxController {
+  var index = 0.obs;
 }
 
-class _HomeLayoutState extends State<HomeLayout> {
-  int selectedIndex = 0;
-  final List<String> titles = ["", "Calendar", "", "Messages", "Profile"];
+class HomeLayout extends StatelessWidget {
+  HomeLayout({super.key});
+
+  final HomeController controller = Get.put(HomeController());
+  final titles = ["", "Calendar", "", "Messages", "Profile"];
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme theme = Theme.of(context).colorScheme;
-    final NavigatorState navigator = Navigator.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(titles[selectedIndex]),
-        actions: [
-          IconButton.outlined(
-            onPressed: () {},
-            iconSize: 20,
-            icon: Icon(HugeIcons.strokeRoundedNotification02),
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(theme.surface),
-            ),
-          )
-        ],
+        title: Obx(() => Text(titles[controller.index.value])),
+        actions: [NotificationButton()],
       ),
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (index) => setState(() => selectedIndex = index),
-        indicatorColor: theme.primary,
-        selectedIndex: selectedIndex,
-        destinations: [
-          NavigationItem(
-            icon: HugeIcons.strokeRoundedHome09,
-            label: 'Home',
-          ),
-          NavigationItem(
-            icon: HugeIcons.strokeRoundedCalendar03,
-            label: 'Calendar',
-          ),
-          Center(
-            child: IconButton.filled(
-              icon: Icon(HugeIcons.strokeRoundedAdd01),
-              onPressed: () => navigator.push(createRoute(AddProject())),
-            ),
-          ),
-          NavigationItem(
-            icon: HugeIcons.strokeRoundedMail01,
-            label: 'Messages',
-            badge: "2",
-          ),
-          NavigationItem(
-            icon: HugeIcons.strokeRoundedUser,
-            label: 'Profile',
-          ),
-        ],
-      ),
-      body: [
-        HomeScreen(),
-        CalendarScreen(),
-        Placeholder(),
-        MessagesScreen(),
-        ProfileScreen()
-      ][selectedIndex],
+      bottomNavigationBar: Obx(() => NavigationBar(
+            onDestinationSelected: (index) => controller.index.value = index,
+            indicatorColor: theme.primary,
+            selectedIndex: controller.index.value,
+            destinations: [
+              NavigationItem(
+                icon: HugeIcons.strokeRoundedHome09,
+                label: 'Home',
+              ),
+              NavigationItem(
+                icon: HugeIcons.strokeRoundedCalendar03,
+                label: 'Calendar',
+              ),
+              Center(
+                child: IconButton.filled(
+                  icon: Icon(HugeIcons.strokeRoundedAdd01),
+                  onPressed: () => Get.toNamed("/add-project"),
+                ),
+              ),
+              NavigationItem(
+                icon: HugeIcons.strokeRoundedMail01,
+                label: 'Messages',
+                badge: "2",
+              ),
+              NavigationItem(
+                icon: HugeIcons.strokeRoundedUser,
+                label: 'Profile',
+              ),
+            ],
+          )),
+      body: Obx(() => [
+            HomeScreen(),
+            CalendarScreen(),
+            Placeholder(),
+            MessagesScreen(),
+            ProfileScreen()
+          ][controller.index.value]),
     );
   }
 }
