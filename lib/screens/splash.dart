@@ -50,10 +50,7 @@ class SplashScreen extends StatelessWidget {
               Text(
                 'How may I help\nyou today!',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
