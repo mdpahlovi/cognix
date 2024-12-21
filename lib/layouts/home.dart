@@ -8,7 +8,9 @@ import 'package:kajbari/screens/profile.dart';
 import 'package:kajbari/widgets/global/NotificationButton.dart';
 
 class HomeController extends GetxController {
-  var index = 0.obs;
+  var tabIndex = 0.obs;
+
+  void changeTabIndex(int index) => tabIndex.value = index;
 }
 
 class HomeLayout extends StatelessWidget {
@@ -23,13 +25,13 @@ class HomeLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(titles[controller.index.value])),
-        actions: [NotificationButton()],
+        title: Obx(() => Text(titles[controller.tabIndex.value])),
+        actions: [NotificationButton(), SizedBox(width: 8)],
       ),
       bottomNavigationBar: Obx(() => NavigationBar(
-            onDestinationSelected: (index) => controller.index.value = index,
+            onDestinationSelected: controller.changeTabIndex,
             indicatorColor: theme.primary,
-            selectedIndex: controller.index.value,
+            selectedIndex: controller.tabIndex.value,
             destinations: [
               NavigationItem(
                 icon: HugeIcons.strokeRoundedHome09,
@@ -62,7 +64,7 @@ class HomeLayout extends StatelessWidget {
             Placeholder(),
             MessagesScreen(),
             ProfileScreen()
-          ][controller.index.value]),
+          ][controller.tabIndex.value]),
     );
   }
 }

@@ -8,11 +8,19 @@ class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color background = Theme.of(context).colorScheme.surface;
-    return IconButton.outlined(
-      onPressed: () => Get.back(),
-      icon: Icon(HugeIcons.strokeRoundedArrowLeft01),
-      padding: EdgeInsets.only(right: 2),
-      style: ButtonStyle(backgroundColor: WidgetStateProperty.all(background)),
+    return Container(
+      child: Container(
+        width: 40,
+        height: 40,
+        alignment: Alignment.center,
+        child: IconButton.outlined(
+          onPressed: () => Get.back(),
+          icon: Icon(HugeIcons.strokeRoundedArrowLeft01),
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(background),
+          ),
+        ),
+      ),
     );
   }
 }

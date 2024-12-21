@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kajbari/layouts/home.dart';
 import 'package:kajbari/screens/add-project.dart';
+import 'package:kajbari/screens/splash.dart';
 
 void main() {
   runApp(const KajBari());
@@ -40,7 +41,12 @@ class KajBari extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/',
+          page: () => SplashScreen(),
+        ),
+        GetPage(
+          name: '/home',
           page: () => HomeLayout(),
+          transition: Transition.leftToRight,
         ),
         GetPage(
           name: '/add-project',

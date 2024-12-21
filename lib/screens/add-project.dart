@@ -11,7 +11,7 @@ class AddProject extends StatelessWidget {
       appBar: AppBar(
         leading: CustomBackButton(),
         title: Text("Add Project"),
-        actions: [NotificationButton()],
+        actions: [NotificationButton(), SizedBox(width: 8)],
       ),
       body: const Center(
         child: Text('Add Project'),
