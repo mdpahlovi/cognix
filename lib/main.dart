@@ -1,20 +1,19 @@
+import 'package:cognix/layouts/home.dart';
+import 'package:cognix/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kajbari/layouts/home.dart';
-import 'package:kajbari/screens/add-project.dart';
-import 'package:kajbari/screens/splash.dart';
 
 void main() {
-  runApp(const KajBari());
+  runApp(const Cognix());
 }
 
-class KajBari extends StatelessWidget {
-  const KajBari({super.key});
+class Cognix extends StatelessWidget {
+  const Cognix({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'KajBari',
+      title: 'Cognix',
       theme: ThemeData(
         useMaterial3: true,
         appBarTheme: AppBarTheme(
@@ -47,11 +46,6 @@ class KajBari extends StatelessWidget {
           name: '/home',
           page: () => HomeLayout(),
           transition: Transition.leftToRight,
-        ),
-        GetPage(
-          name: '/add-project',
-          page: () => AddProject(),
-          transition: Transition.downToUp,
         ),
       ],
     );

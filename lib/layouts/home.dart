@@ -1,11 +1,11 @@
+import 'package:cognix/screens/assistants.dart';
+import 'package:cognix/screens/home.dart';
+import 'package:cognix/screens/history.dart';
+import 'package:cognix/screens/account.dart';
+import 'package:cognix/widgets/global/NotificationButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:kajbari/screens/calendar.dart';
-import 'package:kajbari/screens/home.dart';
-import 'package:kajbari/screens/messages.dart';
-import 'package:kajbari/screens/profile.dart';
-import 'package:kajbari/widgets/global/NotificationButton.dart';
 
 class HomeController extends GetxController {
   var tabIndex = 0.obs;
@@ -17,7 +17,7 @@ class HomeLayout extends StatelessWidget {
   HomeLayout({super.key});
 
   final HomeController controller = Get.put(HomeController());
-  final titles = ["", "Calendar", "", "Messages", "Profile"];
+  final titles = ["", "Assistants", "History", "Account"];
 
   @override
   Widget build(BuildContext context) {
@@ -38,32 +38,24 @@ class HomeLayout extends StatelessWidget {
                 label: 'Home',
               ),
               NavigationItem(
-                icon: HugeIcons.strokeRoundedCalendar03,
-                label: 'Calendar',
-              ),
-              Center(
-                child: IconButton.filled(
-                  icon: Icon(HugeIcons.strokeRoundedAdd01),
-                  onPressed: () => Get.toNamed("/add-project"),
-                ),
+                icon: HugeIcons.strokeRoundedAiBrowser,
+                label: 'Assistants',
               ),
               NavigationItem(
-                icon: HugeIcons.strokeRoundedMail01,
-                label: 'Messages',
-                badge: "2",
+                icon: HugeIcons.strokeRoundedAiFolder01,
+                label: 'History',
               ),
               NavigationItem(
                 icon: HugeIcons.strokeRoundedUser,
-                label: 'Profile',
+                label: 'Account',
               ),
             ],
           )),
       body: Obx(() => [
             HomeScreen(),
-            CalendarScreen(),
-            Placeholder(),
-            MessagesScreen(),
-            ProfileScreen()
+            AssistantsScreen(),
+            HistoryScreen(),
+            AccountScreen()
           ][controller.tabIndex.value]),
     );
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MessagesScreen extends StatelessWidget {
-  const MessagesScreen({super.key});
+class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Messages Screen"),
+      child: Text("History Screen"),
     );
   }
 }

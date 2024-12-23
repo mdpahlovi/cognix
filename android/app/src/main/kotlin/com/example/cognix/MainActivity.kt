@@ -1,4 +1,4 @@
-package com.example.kajbari
+package com.example.cognix
 
 import io.flutter.embedding.android.FlutterActivity
 
