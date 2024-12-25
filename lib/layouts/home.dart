@@ -1,7 +1,7 @@
-import 'package:cognix/screens/assistants.dart';
-import 'package:cognix/screens/home.dart';
-import 'package:cognix/screens/history.dart';
 import 'package:cognix/screens/account.dart';
+import 'package:cognix/screens/assistants.dart';
+import 'package:cognix/screens/history.dart';
+import 'package:cognix/screens/home.dart';
 import 'package:cognix/widgets/global/NotificationButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +17,7 @@ class HomeLayout extends StatelessWidget {
   HomeLayout({super.key});
 
   final HomeController controller = Get.put(HomeController());
-  final titles = ["", "Assistants", "History", "Account"];
+  final titles = ["Hi Pahlovi", "Assistants", "History", "Account"];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,11 @@ class HomeLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(titles[controller.tabIndex.value])),
+        title: Obx(() => Text(
+              controller.tabIndex.value == 0
+                  ? "Hi Pahlovi"
+                  : titles[controller.tabIndex.value],
+            )),
         actions: [NotificationButton(), SizedBox(width: 8)],
       ),
       bottomNavigationBar: Obx(() => NavigationBar(
