@@ -1,17 +1,33 @@
-import 'package:cognix/layouts/home.dart';
+import 'package:cognix/controllers/bottom-navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final BottomNavigation controller = Get.put(BottomNavigation());
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme theme = Theme.of(context).colorScheme;
-    final HomeController controller = Get.find<HomeController>();
 
     final List<Map<String, dynamic>> historyItems = [
+      {
+        'color': theme.primary,
+        'icon': HugeIcons.strokeRoundedWechat,
+        'label': 'Show me some color palettes for AI...',
+      },
+      {
+        'color': theme.secondary,
+        'icon': HugeIcons.strokeRoundedVoice,
+        'label': 'I need some UI inspiration for dark...',
+      },
+      {
+        'color': theme.tertiary,
+        'icon': HugeIcons.strokeRoundedAiImage,
+        'label': 'What are the best mobile apps 2023...',
+      },
       {
         'color': theme.primary,
         'icon': HugeIcons.strokeRoundedWechat,
@@ -34,6 +50,7 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 6),
           Text(
             'How may I help\nyou today?',
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
@@ -42,7 +59,6 @@ class HomeScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                flex: 1,
                 child: buildFeatureCart(
                   color: historyItems[0]['color'],
                   icon: historyItems[0]['icon'],
@@ -52,7 +68,6 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(width: 8),
               Expanded(
-                flex: 1,
                 child: Column(
                   children: [
                     buildFeatureCart(
@@ -73,7 +88,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

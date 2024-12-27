@@ -1,35 +1,38 @@
+import 'package:cognix/controllers/bottom-navigation.dart';
 import 'package:cognix/screens/account.dart';
 import 'package:cognix/screens/assistants.dart';
 import 'package:cognix/screens/history.dart';
 import 'package:cognix/screens/home.dart';
+import 'package:cognix/widgets/global/Avatar.dart';
 import 'package:cognix/widgets/global/NotificationButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class HomeController extends GetxController {
-  var tabIndex = 0.obs;
-
-  void changeTabIndex(int index) => tabIndex.value = index;
-}
-
 class HomeLayout extends StatelessWidget {
   HomeLayout({super.key});
 
-  final HomeController controller = Get.put(HomeController());
-  final titles = ["Hi Pahlovi", "Assistants", "History", "Account"];
+  final BottomNavigation controller = Get.put(BottomNavigation());
+  final titles = ["Hi, Pahlovi", "Assistants", "History", "Account"];
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme theme = Theme.of(context).colorScheme;
+    final String src = "https://avatars.githubusercontent.com/u/108403206?v=4";
 
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(
-              controller.tabIndex.value == 0
-                  ? "Hi Pahlovi"
-                  : titles[controller.tabIndex.value],
-            )),
+        title: Obx(
+          () => controller.tabIndex.value == 0
+              ? Row(
+                  children: [
+                    Avatar(child: Image.network(src)),
+                    SizedBox(width: 8),
+                    Text("Hi, Pahlovi"),
+                  ],
+                )
+              : Text(titles[controller.tabIndex.value]),
+        ),
         actions: [NotificationButton(), SizedBox(width: 8)],
       ),
       bottomNavigationBar: Obx(() => NavigationBar(
