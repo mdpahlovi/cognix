@@ -1,4 +1,4 @@
-import 'package:cognix/controllers/bottom-navigation.dart';
+import 'package:cognix/controllers/bottom_navigation.dart';
 import 'package:cognix/screens/account.dart';
 import 'package:cognix/screens/assistants.dart';
 import 'package:cognix/screens/history.dart';

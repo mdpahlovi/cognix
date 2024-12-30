@@ -1,8 +1,10 @@
 import 'package:cognix/constants/features.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Widget buildFeatureItem(FeatureItem feature, bool isLarge) {
   return InkWell(
+    onTap: () => Get.toNamed(feature.link),
     child: Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(

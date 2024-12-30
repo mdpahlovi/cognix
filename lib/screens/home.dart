@@ -1,5 +1,5 @@
 import 'package:cognix/constants/features.dart';
-import 'package:cognix/controllers/bottom-navigation.dart';
+import 'package:cognix/controllers/bottom_navigation.dart';
 import 'package:cognix/widgets/home/feature.dart';
 import 'package:cognix/widgets/home/histories.dart';
 import 'package:flutter/material.dart';
