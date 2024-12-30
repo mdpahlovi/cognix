@@ -1,4 +1,7 @@
 import 'package:cognix/layouts/home.dart';
+import 'package:cognix/screens/features/chat_bot.dart';
+import 'package:cognix/screens/features/image_generator.dart';
+import 'package:cognix/screens/features/voice_assistant.dart';
 import 'package:cognix/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,6 +49,21 @@ class Cognix extends StatelessWidget {
           name: '/home',
           page: () => HomeLayout(),
           transition: Transition.leftToRight,
+        ),
+        GetPage(
+          name: '/chat-bot',
+          page: () => ChatBot(),
+          transition: Transition.fadeIn,
+        ),
+        GetPage(
+          name: '/image-generator',
+          page: () => ImageGenerator(),
+          transition: Transition.fadeIn,
+        ),
+        GetPage(
+          name: '/voice-assistant',
+          page: () => VoiceAssistant(),
+          transition: Transition.fadeIn,
         ),
       ],
     );
