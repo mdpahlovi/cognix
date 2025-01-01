@@ -22,6 +22,7 @@ class Cognix extends StatelessWidget {
         appBarTheme: AppBarTheme(
           centerTitle: true,
           backgroundColor: const Color(0xFF010101),
+          surfaceTintColor: const Color(0xFF171717),
         ),
         scaffoldBackgroundColor: const Color(0xFF010101),
         colorScheme: ColorScheme(

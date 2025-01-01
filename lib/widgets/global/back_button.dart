@@ -9,8 +9,6 @@ class CustomBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color background = Theme.of(context).colorScheme.surface;
     return Container(
-      width: 40,
-      height: 40,
       alignment: Alignment.center,
       child: IconButton.outlined(
         onPressed: () => Get.back(),

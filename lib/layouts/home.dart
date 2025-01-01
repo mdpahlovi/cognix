@@ -4,7 +4,7 @@ import 'package:cognix/screens/assistants.dart';
 import 'package:cognix/screens/history.dart';
 import 'package:cognix/screens/home.dart';
 import 'package:cognix/widgets/global/avatar.dart';
-import 'package:cognix/widgets/global/notification-button.dart';
+import 'package:cognix/widgets/global/notification_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
