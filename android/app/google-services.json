@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "134211219561",
+    "project_id": "cognix-app",
+    "storage_bucket": "cognix-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134211219561:android:bfde848af7ca5b247a72f8",
+        "android_client_info": {
+          "package_name": "com.example.cognix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6BagpjJl4mf4enGAB7AJch3e7rdGLL5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

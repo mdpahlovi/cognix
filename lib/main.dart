@@ -3,11 +3,19 @@ import 'package:cognix/screens/features/chat_bot.dart';
 import 'package:cognix/screens/features/image_generator.dart';
 import 'package:cognix/screens/features/voice_assistant.dart';
 import 'package:cognix/screens/splash.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
-  runApp(const Cognix());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(Cognix());
 }
 
 class Cognix extends StatelessWidget {
