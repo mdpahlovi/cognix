@@ -1,10 +1,11 @@
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:cognix/controllers/chat_bot.dart';
 import 'package:cognix/widgets/global/back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatBot extends StatelessWidget {
@@ -12,14 +13,10 @@ class ChatBot extends StatelessWidget {
 
   final ChatBotController controller = Get.put(ChatBotController());
 
-  final openai = OpenAI.instance.build(
-    token: "",
-    baseOption: HttpSetup(connectTimeout: const Duration(seconds: 10)),
-    enableLog: true,
-  );
-
   final curUser = const types.User(id: 'ET4079', firstName: "MD Pahlovi");
   final gptUser = const types.User(id: 'RE1863', firstName: "Bot");
+
+  final String apiKey = dotenv.env['GEMINI_API_KEY']!;
 
   Future<void> handleSendPressed(types.PartialText message, List<types.Message> messages) async {
     final textMessage = types.TextMessage(
@@ -31,32 +28,22 @@ class ChatBot extends StatelessWidget {
 
     controller.addMessage(textMessage);
 
-    List<Map<String, dynamic>> histories = [...messages, textMessage].map((m) {
-      if (m.author.id == curUser.id) {
-        return Messages(role: Role.user, content: (m as types.TextMessage).text).toJson();
-      } else {
-        return Messages(role: Role.assistant, content: (m as types.TextMessage).text).toJson();
-      }
-    }).toList();
-
-    final request = ChatCompleteText(
-      messages: histories,
-      maxToken: 200,
-      model: GptTurbo0301ChatModel(),
-    );
-
     try {
-      final response = await openai.onChatCompletion(request: request);
+      Iterable<Content> histories = [...messages, textMessage]
+          .where((m) => m.author.id == curUser.id)
+          .map((m) => Content.text((m as types.TextMessage).text))
+          .toList();
 
-      for (var element in response!.choices) {
-        if (element.message != null) {
-          controller.addMessage(types.TextMessage(
-            author: gptUser,
-            createdAt: DateTime.now().millisecondsSinceEpoch,
-            id: const Uuid().v4(),
-            text: element.message!.content,
-          ));
-        }
+      final geminiAPI = GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey);
+      final responses = await geminiAPI.generateContent(histories);
+
+      if (responses.text is String) {
+        controller.addMessage(types.TextMessage(
+          author: gptUser,
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+          id: const Uuid().v4(),
+          text: responses.text!.trim(),
+        ));
       }
     } catch (e) {
       controller.addMessage(types.TextMessage(
