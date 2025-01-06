@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme theme = Theme.of(context).colorScheme;
 
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Get.off(() => HomeLayout());
     });
 
@@ -50,7 +50,11 @@ class SplashScreen extends StatelessWidget {
               Text(
                 'How may I help\nyou today!',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400),
+                style: TextStyle(
+                  height: 1.25,
+                  fontSize: 36,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),

@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 
 Widget buildFeatureItem(FeatureItem feature, bool isLarge) {
   return InkWell(
+    borderRadius: BorderRadius.circular(24),
     onTap: () => Get.toNamed(feature.link),
     child: Container(
+      width: double.infinity,
+      height: isLarge ? 220 : 106,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: feature.color,
@@ -29,14 +32,15 @@ Widget buildFeatureItem(FeatureItem feature, bool isLarge) {
               Icon(Icons.arrow_outward, color: Colors.black)
             ],
           ),
-          SizedBox(height: isLarge ? 48 : 8),
           Text(
             feature.label,
             style: TextStyle(
               color: Colors.black,
+              height: 1.25,
               fontSize: isLarge ? 32 : 16,
               fontWeight: FontWeight.w500,
             ),
+            overflow: isLarge ? TextOverflow.visible : TextOverflow.ellipsis,
           ),
         ],
       ),

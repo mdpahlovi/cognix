@@ -10,7 +10,10 @@ class HistoryItem {
 }
 
 List<HistoryItem> histories(BuildContext context) {
-  List<FeatureItem> featureList = features(context);
+  List<FeatureCategory> categoryList = categories(context);
+
+  List<FeatureItem> featureList =
+      categoryList.expand((category) => category.features).toList();
 
   return [
     HistoryItem(

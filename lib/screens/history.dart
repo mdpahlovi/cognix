@@ -1,4 +1,5 @@
-import 'package:cognix/widgets/home/histories.dart';
+import 'package:cognix/constants/histories.dart';
+import 'package:cognix/widgets/home/history.dart';
 import 'package:flutter/material.dart';
 
 class HistoryScreen extends StatelessWidget {
@@ -6,13 +7,14 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<HistoryItem> historyList = histories(context);
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        children: [
-          SizedBox(height: 8),
-          Expanded(child: Histories()),
-        ],
+      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+      child: ListView.separated(
+        itemCount: historyList.length,
+        itemBuilder: (context, index) => buildHistoryItem(historyList[index]),
+        separatorBuilder: (context, index) => SizedBox(height: 8),
       ),
     );
   }

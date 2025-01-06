@@ -12,7 +12,8 @@ import 'package:hugeicons/hugeicons.dart';
 class HomeLayout extends StatelessWidget {
   HomeLayout({super.key});
 
-  final BottomNavigation controller = Get.put(BottomNavigation());
+  final BottomNavigationController controller =
+      Get.put(BottomNavigationController());
   final titles = ["Hi, Pahlovi", "Assistants", "History", "Account"];
 
   @override
