@@ -49,15 +49,15 @@ List<FeatureCategory> categories(BuildContext context) {
       features: [
         FeatureItem(
           color: Theme.of(context).colorScheme.tertiary,
-          icon: HugeIcons.strokeRoundedPdf01,
-          label: 'PDF Scanner',
-          link: '/pdf-scanner',
-        ),
-        FeatureItem(
-          color: Theme.of(context).colorScheme.primary,
           icon: HugeIcons.strokeRoundedTextCreation,
           label: 'OCR (Text Recognition)',
           link: '/ocr-tool',
+        ),
+        FeatureItem(
+          color: Theme.of(context).colorScheme.primary,
+          icon: HugeIcons.strokeRoundedPdf01,
+          label: 'PDF Scanner',
+          link: '/pdf-scanner',
         ),
         FeatureItem(
           color: Theme.of(context).colorScheme.secondary,

@@ -1,6 +1,7 @@
 import 'package:cognix/layouts/home.dart';
 import 'package:cognix/screens/features/chat_bot.dart';
 import 'package:cognix/screens/features/image_generator.dart';
+import 'package:cognix/screens/features/ocr_tool.dart';
 import 'package:cognix/screens/features/voice_assistant.dart';
 import 'package:cognix/screens/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -68,13 +69,18 @@ class Cognix extends StatelessWidget {
           transition: Transition.fadeIn,
         ),
         GetPage(
-          name: '/image-generator',
-          page: () => ImageGenerator(),
+          name: '/voice-assistant',
+          page: () => VoiceAssistant(),
           transition: Transition.fadeIn,
         ),
         GetPage(
-          name: '/voice-assistant',
-          page: () => VoiceAssistant(),
+          name: '/ocr-tool',
+          page: () => OCRTool(),
+          transition: Transition.fadeIn,
+        ),
+        GetPage(
+          name: '/image-generator',
+          page: () => ImageGenerator(),
           transition: Transition.fadeIn,
         ),
       ],
