@@ -1,5 +1,6 @@
 import 'package:cognix/widgets/global/back_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class OCRTool extends StatelessWidget {
@@ -34,7 +35,7 @@ class OCRTool extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => Get.toNamed("/camera"),
         child: Icon(HugeIcons.strokeRoundedCamera01),
       ),
     );

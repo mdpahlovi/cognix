@@ -1,8 +1,9 @@
 import 'package:cognix/layouts/home.dart';
-import 'package:cognix/screens/features/chat_bot.dart';
-import 'package:cognix/screens/features/image_generator.dart';
-import 'package:cognix/screens/features/ocr_tool.dart';
-import 'package:cognix/screens/features/voice_assistant.dart';
+import 'package:cognix/screens/camera/camera.dart';
+import 'package:cognix/screens/feature/chat_bot.dart';
+import 'package:cognix/screens/feature/image_generator.dart';
+import 'package:cognix/screens/feature/ocr_tool.dart';
+import 'package:cognix/screens/feature/voice_assistant.dart';
 import 'package:cognix/screens/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +82,11 @@ class Cognix extends StatelessWidget {
         GetPage(
           name: '/image-generator',
           page: () => ImageGenerator(),
+          transition: Transition.fadeIn,
+        ),
+        GetPage(
+          name: '/camera',
+          page: () => CameraScreen(),
           transition: Transition.fadeIn,
         ),
       ],
