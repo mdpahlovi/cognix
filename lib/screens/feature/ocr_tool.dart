@@ -1,16 +1,22 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:cognix/controllers/ocr_controller.dart';
 import 'package:cognix/widgets/global/back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:image_picker/image_picker.dart';
 
 class OCRTool extends StatelessWidget {
   OCRTool({super.key});
 
+  final ImagePicker imagePicker = ImagePicker();
   final OCRController ocrController = Get.put(OCRController());
+
+  Future<void> pickImage() async {
+    final image = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (image != null) ocrController.setImage(image);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +42,12 @@ class OCRTool extends StatelessWidget {
                       itemCount: imageCount + 1,
                       itemBuilder: (context, index) {
                         return index != imageCount
-                            ? buildImageTile(image: images[index], select: true, onSelect: () => {})
-                            : buildAddImageTile();
+                            ? buildImageTile(
+                                image: images[index],
+                                select: true,
+                                onSelect: () => ocrController.removeImage(index),
+                              )
+                            : buildAddImageTile(pickImage: pickImage);
                       },
                       separatorBuilder: (context, index) => SizedBox(width: 8),
                     ),
@@ -69,23 +79,26 @@ class OCRTool extends StatelessWidget {
             );
           } else {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset('assets/clipboard.png', width: 192),
-                  SizedBox(height: 20),
-                  Text(
-                    "Don't have any document",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    "Start a new scan from your camera or\nimported photos",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: theme.onSurface.withAlpha(128)),
-                  )
-                ],
+              child: GestureDetector(
+                onTap: pickImage,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/clipboard.png', width: 192),
+                    SizedBox(height: 20),
+                    Text(
+                      "Don't have any document",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "Start a new scan from your camera or\nimported photos",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: theme.onSurface.withAlpha(128)),
+                    )
+                  ],
+                ),
               ),
             );
           }
@@ -99,20 +112,23 @@ class OCRTool extends StatelessWidget {
   }
 }
 
-Widget buildImageTile({required XFile image, required bool select, required void onSelect}) {
+Widget buildImageTile({required XFile image, required bool select, required void Function() onSelect}) {
   return select
       ? Stack(
           children: [
             AspectRatio(
               aspectRatio: 3 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Color(0xFFC6F432)),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.file(File(image.path), fit: BoxFit.cover),
+              child: GestureDetector(
+                onTap: onSelect,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Color(0xFFC6F432)),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.file(File(image.path), fit: BoxFit.cover),
+                  ),
                 ),
               ),
             ),
@@ -140,9 +156,9 @@ Widget buildImageTile({required XFile image, required bool select, required void
         );
 }
 
-Widget buildAddImageTile() {
+Widget buildAddImageTile({required void Function() pickImage}) {
   return GestureDetector(
-    onTap: () => {},
+    onTap: pickImage,
     child: AspectRatio(
       aspectRatio: 3 / 4,
       child: Container(
