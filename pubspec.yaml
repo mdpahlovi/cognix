@@ -45,6 +45,8 @@ dependencies:
     path: ^1.9.0
     path_provider: ^2.1.5
     image_picker: ^1.1.2
+    pushy_flutter: ^2.0.28
+    firebase_messaging: ^15.2.0
 
 dev_dependencies:
     flutter_test:
